@@ -1,0 +1,58 @@
+{
+  "name": "pi-peek",
+  "version": "0.1.0",
+  "description": "Read json, xml, yaml files efficiently: schema, find, get. Native pi tool + CLI for other agent harnesses",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "json",
+    "yaml",
+    "xml",
+    "agent",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "peek": "./cli.js"
+  },
+  "files": [
+    "index.ts",
+    "core.js",
+    "cli.js",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node check.ts"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.12.0",
+    "yaml": "^2.9.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alfar-Lab/pi-peek.git"
+  },
+  "homepage": "https://github.com/Alfar-Lab/pi-peek"
+}
