@@ -5,12 +5,12 @@ description: Read large JSON, XML, YAML files without loading them whole. Use in
 
 # peek
 
-Requires the `peek` command (`npm i -g github:Alfar-Lab/pi-peek`).
+Requires the `dpeek` command (`npm i -g github:Alfar-Lab/pi-peek`).
 
 ```
-peek schema <file>                 key tree: types, array lengths, sample values (depth 3)
-peek find <file> <regex>           every path whose key matches regex
-peek get <file> [path] [--max N]   one subtree as JSON, capped at N chars (default 2000)
+dpeek schema <file>                key tree: types, array lengths, sample values (depth 3)
+dpeek find <file> <regex>          every path whose key matches regex
+dpeek get <file> [path] [--max N]  one subtree as JSON, capped at N chars (default 2000)
 ```
 
 Workflow: `schema` first to see structure, `find` to locate a key, `get` to read only that part.

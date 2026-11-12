@@ -13,7 +13,7 @@ Registers the `peek` tool. No skill needed.
 ## Other agent harnesses (CLI + skill)
 
 ```bash
-npm i -g github:Alfar-Lab/pi-peek    # provides the `peek` command
+npm i -g github:Alfar-Lab/pi-peek    # provides the `dpeek` command
 ```
 
 Copy `skills/peek/SKILL.md` into the harness's skill folder, e.g.:
@@ -31,9 +31,9 @@ cp "$(npm root -g)/pi-peek/skills/peek/SKILL.md" ~/.claude/skills/peek/
 ## Commands
 
 ```
-peek schema <file>                 key tree: types, array lengths, sample values (depth 3)
-peek find <file> <regex>           every path whose key matches regex
-peek get <file> [path] [--max N]   one subtree as JSON, capped at N chars (default 2000)
+dpeek schema <file>                key tree: types, array lengths, sample values (depth 3)
+dpeek find <file> <regex>          every path whose key matches regex
+dpeek get <file> [path] [--max N]  one subtree as JSON, capped at N chars (default 2000)
 ```
 
 ## Dev

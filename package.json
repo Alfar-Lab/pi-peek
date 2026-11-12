@@ -1,6 +1,6 @@
 {
   "name": "pi-peek",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read json, xml, yaml files efficiently: schema, find, get. Native pi tool + CLI for other agent harnesses",
   "type": "module",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "node": ">=20"
   },
   "bin": {
-    "peek": "./cli.js"
+    "dpeek": "./cli.js"
   },
   "files": [
     "index.ts",
