@@ -36,6 +36,100 @@ dpeek find <file> <regex>          every path whose key matches regex
 dpeek get <file> [path] [--max N]  one subtree as JSON, capped at N chars (default 2000)
 ```
 
+## Example
+
+`app.json`:
+
+```json
+{
+  "name": "shop-api",
+  "version": "2.4.0",
+  "server": { "port": 8080, "cors": { "origins": ["https://shop.example.com"], "credentials": true } },
+  "users": [
+    { "id": 1, "name": "Ana", "roles": ["admin"], "address": { "city": "Bandung", "zip": "40115" } },
+    { "id": 2, "name": "Budi", "roles": ["user"], "email": "budi@example.com" }
+  ]
+}
+```
+
+**schema**: structure first. Keys of all array items are merged (`email` exists only in `users[1]`).
+
+```console
+$ dpeek schema app.json
+$: object{4}
+  name: string = "shop-api"
+  version: string = "2.4.0"
+  server: object{2}
+    port: number = 8080
+    cors: object{2}
+      origins: array[1] of string = "https://shop.example.com"
+      credentials: boolean = true
+  users: array[2] of object
+    []: object{5}
+      id: number = 1
+      name: string = "Ana"
+      roles: array[1] of string = "admin"
+      address: object{2}
+        city: string = "Bandung"
+        zip: string = "40115"
+      email: string = "budi@example.com"
+```
+
+**find**: locate keys by regex.
+
+```console
+$ dpeek find app.json '^(id|city)$'
+users[0].id: number = 1
+users[0].address.city: string = "Bandung"
+users[1].id: number = 2
+```
+
+**get**: read only one subtree.
+
+```console
+$ dpeek get app.json users[0].address
+{
+  "city": "Bandung",
+  "zip": "40115"
+}
+```
+
+Large output is capped and suggests a narrower path:
+
+```console
+$ dpeek get app.json users --max 60
+[
+  {
+    "id": 1,
+    "name": "Ana",
+    "roles": [
+      "
+… [truncated: 60 of 257 chars. Narrow the path, e.g. users[0]]
+```
+
+**XML**: attributes become `@name`. `books.xml`:
+
+```xml
+<catalog>
+  <book id="b1" lang="en"><title>One</title><price>10</price></book>
+  <book id="b2"><title>Two</title></book>
+</catalog>
+```
+
+```console
+$ dpeek find books.xml '^@id$'
+catalog.book[0].@id: string = "b1"
+catalog.book[1].@id: string = "b2"
+
+$ dpeek get books.xml 'catalog.book[1]'
+{
+  "title": "Two",
+  "@id": "b2"
+}
+```
+
+In pi, the same actions run through the `peek` tool: `peek({ action: "find", file: "app.json", regex: "^id$" })`.
+
 ## Dev
 
 ```bash
